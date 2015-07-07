@@ -1,12 +1,13 @@
-<html?
-    <head>
-        <title>Jessica's Blog</title>
-    <h1>Jessica's First Blog!</h1>
-    <h2><em>All About Animals</em></h2>
-    <ul><li>Monkeys<li>Turtles<li>Walruses<li>Tigers<li>Flamingos<ul>
-     </head>
-    <body>
-        <p>Learn about your favorite animals!
-        What animal is your favorite?</p>
-    </body>
-</html>
+{% extends "blog/base.html" %}
+
+{% block content %}
+    {% for post in posts %}
+        <div class="post">
+            <div class="date">
+                {{ post.published_date }}
+            </div>
+            <h1><a href="{% url "blog.views.post_detail" pk=post.pk %}">{{ post.title }}</a></h1>
+            <p>{{ post.text|linebreaks }}</p>
+        </div>
+    {% endfor %}
+{% endblock content %}
